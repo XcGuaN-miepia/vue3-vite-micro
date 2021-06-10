@@ -21,7 +21,7 @@ const routes:VueRouter.RouteRecordRaw[] = [{
 ]
 
 const router = VueRouter.createRouter({
-  history: VueRouter.createWebHistory('/vue3-vite-mirco/'),
+  history: VueRouter.createWebHistory('/vue3-vite-mirco'),
   routes
 })
 
