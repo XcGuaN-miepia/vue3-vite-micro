@@ -24,14 +24,10 @@ function render(props: IRenderProps) {
     app.use(module, key)
   })
 
-  console.log(container)
-
   app.use(router).use(ElementPlus).mount(container)
 }
 // 独立运行时
 if (!window.__POWERED_BY_QIANKUN__) {
-  console.log('app')
-
   render({ container: '#app' })
 }
 

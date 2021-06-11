@@ -1,14 +1,26 @@
 <template>
   <div>
     main
+    {{ count }}
+    <el-button @click="add">
+      +1
+    </el-button>
   </div>
 </template>
 
 <script lang="ts">
+import { ref } from '@vue/reactivity'
 export default {
-  data() {
-    return {
+  setup() {
+    let count = ref(0)
 
+    const add = () => {
+      count.value++
+    }
+
+    return {
+      count,
+      add
     }
   },
   mounted() {

@@ -8,7 +8,6 @@ import MainRouter from './main'
 const routes:VueRouter.RouteRecordRaw[] = [{
   path: '/',
   component: Home,
-  redirect: '/main',
   children: MainRouter
 }, {
   path: '/404',
@@ -26,8 +25,6 @@ const router = VueRouter.createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  console.log(to)
-
   if(to.path === '/login' || to.path === '/main' || to.path === '/404') {
     next()
   } else {
