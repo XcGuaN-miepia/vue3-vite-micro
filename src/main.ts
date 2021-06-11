@@ -37,11 +37,15 @@ export async function bootstrap() {
 }
 
 export async function mount(props: any) {
-  console.log('mount subapp')
+  console.log('mount subapp', props)
   render(props)
 }
 
 export async function unmount() {
   console.log('unmount college app')
   app.unmount()
+}
+
+export async function update(props: any) {
+  console.log('update', props)
 }
