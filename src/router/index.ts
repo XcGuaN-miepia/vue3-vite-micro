@@ -21,10 +21,14 @@ const routes:VueRouter.RouteRecordRaw[] = [{
 
 const router = VueRouter.createRouter({
   history: VueRouter.createWebHistory('/vue3-vite-mirco'),
+  // history: VueRouter.createMemoryHistory('/vue3-vite-mirco'),
+  // history: VueRouter.createMemoryHistory(),
   routes
 })
 
 router.beforeEach((to, from, next) => {
+  console.log(to, from)
+
   if(to.path === '/login' || to.path === '/main' || to.path === '/404') {
     next()
   } else {

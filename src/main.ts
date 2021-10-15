@@ -8,7 +8,7 @@ import 'normalreset.css/normalreset.css' // 重置样式
 import '@/assets/css/flex.scss' // 布局样式
 import '@/assets/css/index.scss' // 公共样式
 import 'element-plus/lib/theme-chalk/index.css' // element样式
-
+import { renderWithQiankun,qiankunWindow } from 'vite-plugin-qiankun/dist/helper'
 interface IRenderProps {
   container: Element | string;
 }
@@ -25,27 +25,43 @@ function render(props: IRenderProps) {
   })
 
   app.use(router).use(ElementPlus).mount(container)
+  console.log(qiankunWindow)
 }
+
 // 独立运行时
-if (!window.__POWERED_BY_QIANKUN__) {
+if (!qiankunWindow.__POWERED_BY_QIANKUN__) {
   render({ container: '#app' })
 }
 
-//暴露主应用生命周期钩子
-export async function bootstrap() {
-  console.log('subapp bootstraped')
-}
+renderWithQiankun({
+  mount(props) {
+    console.log('mount subapp', props)
+    render(props)
+  },
+  bootstrap() {
+    console.log('subapp bootstraped')
+  },
+  unmount(props: any) {
+    console.log('unmount college app')
+    app.unmount()
+  }
+})
 
-export async function mount(props: any) {
-  console.log('mount subapp', props)
-  render(props)
-}
+// //暴露主应用生命周期钩子
+// export async function bootstrap() {
+//   console.log('subapp bootstraped')
+// }
 
-export async function unmount() {
-  console.log('unmount college app')
-  app.unmount()
-}
+// export async function mount(props: any) {
+//   console.log('mount subapp', props)
+//   render(props)
+// }
 
-export async function update(props: any) {
-  console.log('update', props)
-}
+// export async function unmount() {
+//   console.log('unmount college app')
+//   app.unmount()
+// }
+
+// export async function update(props: any) {
+//   console.log('update', props)
+// }
