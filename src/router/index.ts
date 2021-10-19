@@ -27,8 +27,6 @@ const router = VueRouter.createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  console.log(to, from)
-
   if(to.path === '/login' || to.path === '/main' || to.path === '/404') {
     next()
   } else {

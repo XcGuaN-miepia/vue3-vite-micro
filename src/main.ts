@@ -13,11 +13,11 @@ interface IRenderProps {
   container: Element | string;
 }
 
-const app = createApp(App)
-
-app.config.globalProperties.$http = axios // axios全局配置
-
 function render(props: IRenderProps) {
+  const app = createApp(App)
+
+  app.config.globalProperties.$http = axios // axios全局配置
+
   const { container } = props
 
   store.forEach(({ module, key }) => {
@@ -25,7 +25,6 @@ function render(props: IRenderProps) {
   })
 
   app.use(router).use(ElementPlus).mount(container)
-  console.log(qiankunWindow)
 }
 
 // 独立运行时
@@ -34,16 +33,12 @@ if (!qiankunWindow.__POWERED_BY_QIANKUN__) {
 }
 
 renderWithQiankun({
-  mount(props) {
-    console.log('mount subapp', props)
+  async mount(props) {
     render(props)
   },
   bootstrap() {
-    console.log('subapp bootstraped')
   },
-  unmount(props: any) {
-    console.log('unmount college app')
-    app.unmount()
+  unmount() {
   }
 })
 
